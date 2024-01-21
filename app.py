@@ -1,9 +1,16 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 import streamlit as st
 import os
 from PIL import Image
 import google.generativeai as genai
-genai.configure(api_key="")
+#put your api key here
+
+genai.configure(api_key=os.getenv("GOOG_API_KEY"))
+#create a model instance
 model=genai.GenerativeModel('gemini-pro-vision')
+
 
 def get_gemini_response(input, image, prompt):
     response=model.generate_content([input, image[0], prompt])
